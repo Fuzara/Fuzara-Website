@@ -1,0 +1,6 @@
+export enum PillarState {
+  CORE_HUB = "CORE_HUB",
+  AMENIC_FILMS = "AMENIC_FILMS",
+  FUZARA_DEV = "FUZARA_DEV",
+  DRONE_MASTERS = "DRONE_MASTERS",
+}
