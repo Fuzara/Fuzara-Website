@@ -1,10 +1,5 @@
 import type { Metadata } from "next";
 import { Inter, JetBrains_Mono, Jost, Roboto } from "next/font/google";
-import { GlobalStateProvider } from "@/components/GlobalStateProvider";
-import { PillarSwitcher } from "@/components/PillarSwitcher";
-import { BackgroundEngine } from "@/components/BackgroundEngine";
-import { NoiseOverlay } from "@/components/NoiseOverlay";
-import { ActivityLogProvider } from "@/components/ActivityLogProvider";
 import "./globals.css";
 
 const inter = Inter({
@@ -30,7 +25,7 @@ const roboto = Roboto({
 
 export const metadata: Metadata = {
   title: "Fuzara Technologies Ecosystem",
-  description: "The Multi-Pillar Web Ecosystem",
+  description: "Innovating the Future, Crafting Excellence.",
 };
 
 export default function RootLayout({
@@ -39,22 +34,11 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
+    <html lang="en" className="dark">
       <body
-        className={`${inter.variable} ${jetbrainsMono.variable} ${jost.variable} ${roboto.variable} antialiased`}
+        className={`${inter.variable} ${jetbrainsMono.variable} ${jost.variable} ${roboto.variable} antialiased bg-black text-white`}
       >
-        <GlobalStateProvider>
-          <ActivityLogProvider>
-            {/* Global Architecture Elements */}
-            <NoiseOverlay />
-            <BackgroundEngine />
-            
-            <main className="relative z-10">{children}</main>
-            
-            {/* Tactical HUD Global Navigation */}
-            <PillarSwitcher />
-          </ActivityLogProvider>
-        </GlobalStateProvider>
+        <main className="relative z-10">{children}</main>
       </body>
     </html>
   );
