@@ -112,7 +112,7 @@ export default function DronesPage() {
 
   return (
     <div className="min-h-screen bg-[#0F172A] font-sans text-white selection:bg-[#00C1A3]/30">
-      
+
       {/* Navigation */}
       <nav className="fixed top-0 w-full z-50 glass-card border-none rounded-none border-b border-white/5 px-6 py-4 bg-[#0F172A]/80 backdrop-blur-lg">
         <Link href="/" className="inline-flex items-center text-sm font-medium text-white/70 hover:text-white transition-colors">
@@ -124,7 +124,7 @@ export default function DronesPage() {
       <section ref={heroRef} className="relative h-[200vh] bg-[#0F172A]">
         {/* Sticky Container */}
         <div className="sticky top-0 h-screen w-full overflow-hidden flex flex-col justify-center px-6">
-          
+
           {/* Background Video */}
           <div className="absolute inset-0 w-full h-full pointer-events-none">
             {/* Navy Overlay */}
@@ -139,7 +139,7 @@ export default function DronesPage() {
               playsInline
             />
           </div>
-          
+
           <div className="container mx-auto max-w-6xl relative z-20">
             <FadeInSection>
               <div className="inline-block px-4 py-2 rounded-full border border-[#00C1A3]/30 bg-[#00C1A3]/10 text-[#00C1A3] text-sm font-semibold tracking-widest uppercase mb-6 shadow-[0_0_15px_rgba(0,193,163,0.1)]">
@@ -187,17 +187,17 @@ export default function DronesPage() {
       <section className="py-24 px-6 relative overflow-hidden">
         {/* Decorative background element */}
         <div className="absolute right-0 top-1/3 w-[800px] h-[800px] bg-[#00C1A3]/5 blur-[150px] rounded-full pointer-events-none" />
-        
+
         <div className="container mx-auto max-w-6xl relative z-10">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
-            
+
             <FadeInSection>
               <h2 className="text-4xl md:text-5xl font-bold mb-6">The Technology</h2>
               <p className="text-xl text-[#00C1A3] font-medium mb-6">Flagship Fleet: DJI Matrice 4 Enterprise</p>
               <p className="text-lg text-white/70 leading-relaxed mb-10">
                 Our operations are powered by the industry-leading Matrice 4 Enterprise series. Equipped with massive sensor arrays, thermal imaging, and RTK precision, it allows us to execute complex missions safely and accurately.
               </p>
-              
+
               <div className="space-y-8">
                 {specs.map((spec, index) => (
                   <div key={index} className="flex gap-4">
@@ -213,13 +213,13 @@ export default function DronesPage() {
             </FadeInSection>
 
             <FadeInSection delay={0.2} className="relative aspect-square lg:aspect-auto lg:h-[600px] rounded-3xl overflow-hidden border border-white/10 bg-gradient-to-br from-white/5 to-transparent flex items-center justify-center group">
-               {/* Elegant placeholder for the Drone image */}
-               <div className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1579820010410-c10411aaaa88?q=80&w=2997&auto=format&fit=crop')] bg-cover bg-center opacity-40 group-hover:opacity-60 transition-opacity duration-700 mix-blend-luminosity"></div>
-               <div className="absolute inset-0 bg-gradient-to-t from-[#0F172A] via-transparent to-transparent"></div>
-               <div className="relative z-10 text-center p-8 backdrop-blur-sm bg-black/20 rounded-2xl border border-white/10 shadow-2xl">
-                 <p className="text-sm tracking-widest uppercase text-white/50 mb-2">System Active</p>
-                 <p className="text-2xl font-bold text-glow text-[#00C1A3]">M4E Telemetry Online</p>
-               </div>
+              {/* Elegant placeholder for the Drone image */}
+              <div className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1579820010410-c10411aaaa88?q=80&w=2997&auto=format&fit=crop')] bg-cover bg-center opacity-40 group-hover:opacity-60 transition-opacity duration-700 mix-blend-luminosity"></div>
+              <div className="absolute inset-0 bg-gradient-to-t from-[#0F172A] via-transparent to-transparent"></div>
+              <div className="relative z-10 text-center p-8 backdrop-blur-sm bg-black/20 rounded-2xl border border-white/10 shadow-2xl">
+                <p className="text-sm tracking-widest uppercase text-white/50 mb-2">System Active</p>
+                <p className="text-2xl font-bold text-glow text-[#00C1A3]">M4E Telemetry Online</p>
+              </div>
             </FadeInSection>
 
           </div>
