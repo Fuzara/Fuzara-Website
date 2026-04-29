@@ -1,8 +1,19 @@
 "use client";
 import React, { useRef } from 'react';
 import Link from 'next/link';
-import { motion, useInView } from 'framer-motion';
+import { motion, useInView, useScroll, useTransform } from 'framer-motion';
 import { Crosshair, Map, Moon, Video, ArrowRight, CheckCircle2 } from 'lucide-react';
+
+const Char = ({ children, progress, range }: { children: React.ReactNode, progress: any, range: [number, number] }) => {
+  const color = useTransform(progress, range, ["rgba(255,255,255,0.2)", "#00C1A3"]);
+  const textShadow = useTransform(progress, range, ["0px 0px 0px rgba(0,193,163,0)", "0px 0px 20px rgba(0,193,163,0.8)"]);
+
+  return (
+    <motion.span style={{ color, textShadow }}>
+      {children}
+    </motion.span>
+  );
+};
 
 function FadeInSection({ children, className, delay = 0 }: { children: React.ReactNode, className?: string, delay?: number }) {
   const ref = useRef(null);
@@ -22,6 +33,42 @@ function FadeInSection({ children, className, delay = 0 }: { children: React.Rea
 }
 
 export default function DronesPage() {
+  const heroRef = useRef<HTMLElement>(null);
+  const { scrollYProgress } = useScroll({
+    target: heroRef,
+    offset: ["start start", "end start"]
+  });
+
+  const line1 = "Precision Spatial Data.";
+  const line2 = "Elevated Operations.";
+  const totalChars = (line1 + line2).replace(/ /g, "").length;
+
+  const renderScrollText = (text: string, startIndex: number) => {
+    const words = text.split(" ");
+    let charIndex = startIndex;
+    return (
+      <div className="flex flex-wrap">
+        {words.map((word, i) => {
+          const chars = word.split("");
+          return (
+            <span key={i} className="inline-block mr-[0.25em]">
+              {chars.map((char, j) => {
+                const start = (charIndex / totalChars) * 0.7;
+                const end = start + ((1 / totalChars) * 0.7);
+                charIndex++;
+                return (
+                  <Char key={j} progress={scrollYProgress} range={[start, end]}>
+                    {char}
+                  </Char>
+                );
+              })}
+            </span>
+          );
+        })}
+      </div>
+    );
+  };
+
   const services = [
     {
       icon: <Map className="w-8 h-8 text-[#00C1A3]" />,
@@ -74,23 +121,39 @@ export default function DronesPage() {
       </nav>
 
       {/* Hero Section */}
-      <section className="relative pt-40 pb-20 px-6 overflow-hidden">
-        {/* Subtle background glow */}
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-[#00C1A3]/10 blur-[120px] rounded-full pointer-events-none" />
-        
-        <div className="container mx-auto max-w-6xl relative z-10">
-          <FadeInSection>
-            <div className="inline-block px-4 py-2 rounded-full border border-[#00C1A3]/30 bg-[#00C1A3]/10 text-[#00C1A3] text-sm font-semibold tracking-widest uppercase mb-6 shadow-[0_0_15px_rgba(0,193,163,0.1)]">
-              Fuzara Drone Masters
-            </div>
-            <h1 className="text-5xl md:text-7xl font-bold tracking-tight mb-8 leading-tight">
-              Precision Spatial Data. <br/>
-              <span className="text-transparent bg-clip-text bg-gradient-to-r from-white to-[#00C1A3]">Elevated Operations.</span>
-            </h1>
-            <p className="text-xl text-white/70 max-w-3xl leading-relaxed mb-10">
-              Fuzara Technologies is a premier, KCAA-certified enterprise drone company operating in Kenya. We move beyond simple drone flights to deliver high-precision spatial data, advanced mapping, and breathtaking cinematography.
-            </p>
-          </FadeInSection>
+      <section ref={heroRef} className="relative h-[200vh] bg-[#0F172A]">
+        {/* Sticky Container */}
+        <div className="sticky top-0 h-screen w-full overflow-hidden flex flex-col justify-center px-6">
+          
+          {/* Background Video */}
+          <div className="absolute inset-0 w-full h-full pointer-events-none">
+            {/* Navy Overlay */}
+            <div className="absolute inset-0 bg-[#0F172A]/60 mix-blend-multiply z-10" />
+            <div className="absolute inset-0 bg-gradient-to-b from-[#0F172A]/30 via-transparent to-[#0F172A] z-10" />
+            <video
+              className="w-full h-full object-cover mix-blend-luminosity opacity-50"
+              src="https://www-cdn.djiits.com/reactor/assets/_next/static/videos/82111ccc-84ca-4b38-b138-43fac4556f60.mp4"
+              autoPlay
+              loop
+              muted
+              playsInline
+            />
+          </div>
+          
+          <div className="container mx-auto max-w-6xl relative z-20">
+            <FadeInSection>
+              <div className="inline-block px-4 py-2 rounded-full border border-[#00C1A3]/30 bg-[#00C1A3]/10 text-[#00C1A3] text-sm font-semibold tracking-widest uppercase mb-6 shadow-[0_0_15px_rgba(0,193,163,0.1)]">
+                Fuzara Drone Masters
+              </div>
+              <div className="text-5xl md:text-7xl font-bold tracking-tight mb-8 leading-tight">
+                {renderScrollText(line1, 0)}
+                {renderScrollText(line2, line1.replace(/ /g, "").length)}
+              </div>
+              <p className="text-xl text-white/70 max-w-3xl leading-relaxed mt-10">
+                Fuzara Technologies is a premier, KCAA-certified enterprise drone company operating in Kenya. We move beyond simple drone flights to deliver high-precision spatial data, advanced mapping, and breathtaking cinematography.
+              </p>
+            </FadeInSection>
+          </div>
         </div>
       </section>
 
