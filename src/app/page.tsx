@@ -30,7 +30,9 @@ export default function Home() {
   const heroRef = useRef<HTMLDivElement>(null);
   const videoRef = useRef<HTMLVideoElement>(null);
   const overlayRef = useRef<HTMLDivElement>(null);
-  
+  const heroVideoContainerRef = useRef<HTMLDivElement>(null);
+  const pillarVideoContainerRef = useRef<HTMLDivElement>(null);
+
   // Section refs
   const introRef = useRef<HTMLDivElement>(null);
   const pillar1Ref = useRef<HTMLDivElement>(null);
@@ -41,7 +43,7 @@ export default function Home() {
     let ctx = gsap.context(() => {
       const video = videoRef.current;
       const overlay = overlayRef.current;
-      
+
       // 1. Hero Subheadline Fade (simple version)
       gsap.from(".hero-subheadline", {
         opacity: 0,
@@ -65,6 +67,29 @@ export default function Home() {
       transitionTl.to(overlay, {
         backgroundColor: "#0F172A",
         ease: "none"
+      });
+
+      // 2.5 Fade transitions for video containers
+      // Fade IN Pillar Video
+      gsap.to(pillarVideoContainerRef.current, {
+        opacity: 1,
+        scrollTrigger: {
+          trigger: ".pillars-wrapper",
+          start: "top bottom",
+          end: "top top",
+          scrub: true,
+        }
+      });
+
+      // Fade OUT Pillar Video at the end
+      gsap.to(pillarVideoContainerRef.current, {
+        opacity: 0,
+        scrollTrigger: {
+          trigger: pillar3Ref.current,
+          start: "bottom top",
+          end: "+=100",
+          scrub: true,
+        }
       });
 
       // 3. Video Scrubbing Logic
@@ -98,9 +123,9 @@ export default function Home() {
 
       // 5. Pinning & Typewriter for each Pillar
       const pillars = [
-        { ref: pillar1Ref, text: "Led by a certified Software Engineer. We build robust, custom solutions. Featuring CashCraft — a revolutionary digital finance app that unifies bank cards into a single dashboard using an automated SMS intelligence engine." },
-        { ref: pillar2Ref, text: "Advanced aerial mapping and surveying. Equipped with the DJI Matrice 4E, offering large-sensor capabilities for unmatched precision in night ops and low-light scenarios. KCAA certified." },
-        { ref: pillar3Ref, text: "High-end cinematography by Amenic Films. We specialize in professional-grade corporate filmmaking, live event production, and complex post-production workflows." }
+        { ref: pillar1Ref, text: "Led by a certified Software Engineer. We build robust, custom solutions." },
+        { ref: pillar2Ref, text: "KCAA certified Advanced Aerial Mapping and Surveying." },
+        { ref: pillar3Ref, text: "High-end cinematography by Amenic Films. We specialize in professional-grade cinematography and live event production." }
       ];
 
       pillars.forEach((pillar, i) => {
@@ -109,7 +134,7 @@ export default function Home() {
 
         const words = pillar.text.split(" ");
         const wordsContainer = section.querySelector(".words-container");
-        
+
         if (wordsContainer) {
           wordsContainer.innerHTML = words.map(w => `<span class="word opacity-0 mr-[0.25em] inline-block">${w}</span>`).join("");
         }
@@ -139,9 +164,23 @@ export default function Home() {
 
   return (
     <div ref={mainRef} className="relative bg-white selection:bg-[#00C1A3] selection:text-white overflow-x-hidden">
-      
-      {/* Sticky Video Background */}
-      <div className="fixed top-0 left-0 w-full h-screen z-0 overflow-hidden pointer-events-none bg-white">
+
+      {/* 1. Hero Background Video Container */}
+      <div ref={heroVideoContainerRef} className="fixed top-0 left-0 w-full h-screen z-0 overflow-hidden pointer-events-none bg-white">
+        <video
+          className="object-cover w-full h-full opacity-60 grayscale contrast-125"
+          autoPlay
+          loop
+          muted
+          playsInline
+          src="/videos/fuzara-hero-bg.mp4"
+        />
+        {/* White Overlay behind the hero */}
+        <div className="absolute inset-0 bg-white/80" />
+      </div>
+
+      {/* 2. Pillars Scrubbing Video Container */}
+      <div ref={pillarVideoContainerRef} className="fixed top-0 left-0 w-full h-screen z-10 overflow-hidden opacity-0 pointer-events-none bg-black">
         <video
           ref={videoRef}
           className="object-cover w-full h-full mix-blend-screen opacity-90 grayscale contrast-125"
@@ -151,17 +190,17 @@ export default function Home() {
           src="/videos/Hero4.mp4"
         />
         {/* Dynamic Overlay that shifts from White to Navy */}
-        <div 
+        <div
           ref={overlayRef}
-          className="absolute inset-0 bg-white"
+          className="absolute inset-0 bg-white opacity-80"
           style={{ transition: "background-color 0.1s linear" }}
         />
       </div>
 
       {/* Hero Section */}
-      <section ref={heroRef} className="relative z-20 h-screen flex flex-col items-center justify-center bg-white">
+      <section ref={heroRef} className="relative z-20 h-screen flex flex-col items-center justify-center bg-transparent">
         <TechnicalGrid />
-        
+
         <div className="relative z-10 text-center px-6 max-w-7xl mx-auto">
           <h1 className="text-7xl md:text-[11rem] font-bold tracking-tighter text-[#0F172A] mb-8 leading-[0.85] uppercase">
             Fuzara <br className="hidden md:block" /> Technologies
@@ -179,11 +218,11 @@ export default function Home() {
       </section>
 
       {/* Pillars Wrapper */}
-      <div className="pillars-wrapper relative z-20">
-        
+      <div className="pillars-wrapper relative z-10">
+
         {/* Our Pillars Intro Section */}
         <section ref={introRef} className="h-screen flex flex-col items-center justify-center text-center px-6 bg-transparent">
-          <div className="max-w-5xl relative z-10">
+          <div className="max-w-5xl relative z-5">
             <h2 className="text-7xl md:text-[10rem] font-bold text-white tracking-tight leading-none uppercase mix-blend-difference">
               Our Pillars
             </h2>
@@ -212,7 +251,7 @@ export default function Home() {
         <section ref={pillar2Ref} className="h-screen flex flex-col items-center justify-center text-center px-6 bg-transparent">
           <div className="max-w-5xl relative z-10">
             <h2 className="text-6xl md:text-[8rem] font-bold text-white mb-10 tracking-tight leading-none uppercase mix-blend-difference">
-              Enterprise <br /> Drone Services
+              Fuzara <br /> Drone Masters
             </h2>
             <div className="text-xl md:text-3xl text-white/90 leading-relaxed font-light max-w-4xl mx-auto words-container">
               {/* GSAP injects words here */}

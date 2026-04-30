@@ -2,8 +2,8 @@
 
 @theme {
   --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
-  --color-accent: #ffffff;
-  --color-background-theme: #000000;
+  --color-accent: #00C1A3;
+  --color-background-theme: #ffffff;
 }
 
 @layer utilities {
@@ -12,20 +12,36 @@
   }
   
   .glass-card {
-    @apply bg-black/40 backdrop-blur-md border border-white/10 shadow-[0_4px_30px_rgba(0,0,0,0.5)];
+    @apply bg-white/5 backdrop-blur-md border border-white/10 shadow-[0_8px_32px_rgba(0,0,0,0.1)];
   }
 
   .text-glow {
-    text-shadow: 0 0 20px rgba(255, 255, 255, 0.3);
+    text-shadow: 0 0 20px rgba(0, 193, 163, 0.2);
+  }
+
+  .text-glow-teal {
+    text-shadow: 0 0 25px rgba(0, 193, 163, 0.6);
+  }
+
+  .bg-grid {
+    background-size: 60px 60px;
+    background-image: linear-gradient(to right, rgba(15, 23, 42, 0.03) 1px, transparent 1px),
+                      linear-gradient(to bottom, rgba(15, 23, 42, 0.03) 1px, transparent 1px);
   }
 }
 
 body {
-  background-color: #000000;
-  color: #ffffff;
+  background-color: #ffffff;
+  color: #0F172A;
+  overflow-x: hidden;
 }
 
 /* Ensure smooth scrolling */
 html {
   scroll-behavior: smooth;
+}
+
+::selection {
+  background: #00C1A3;
+  color: white;
 }

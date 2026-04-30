@@ -1,6 +1,7 @@
 import React from "react";
 import Link from "next/link";
 import { ArrowLeft } from "lucide-react";
+import CTASection from "@/components/CTASection";
 
 export default function SoftwarePage() {
   return (
@@ -54,6 +55,11 @@ export default function SoftwarePage() {
           <p className="text-white/40 font-mono text-sm tracking-widest uppercase">Video Player Placeholder</p>
         </div>
       </section>
+      <CTASection 
+        title="Ready to Build Your Vision?"
+        subtitle="Our software engineering team is ready to help you architect and deploy scalable, high-performance solutions tailored to your unique requirements."
+        pillarColor="#0066FF"
+      />
     </div>
   );
 }

@@ -2,7 +2,8 @@
 import React, { useRef } from 'react';
 import Link from 'next/link';
 import { motion, useInView, useScroll, useTransform } from 'framer-motion';
-import { Crosshair, Map, Moon, Video, ArrowRight, CheckCircle2 } from 'lucide-react';
+import { Crosshair, Map, Moon, Video, ArrowRight, CheckCircle2, Zap, Shield, Target } from 'lucide-react';
+import CTASection from '@/components/CTASection';
 
 const Char = ({ children, progress, range }: { children: React.ReactNode, progress: any, range: [number, number] }) => {
   const color = useTransform(progress, range, ["rgba(255,255,255,0.2)", "#00C1A3"]);
@@ -72,41 +73,41 @@ export default function DronesPage() {
   const services = [
     {
       icon: <Map className="w-8 h-8 text-[#00C1A3]" />,
-      title: "Photogrammetry & Mapping",
-      description: "Generating highly accurate 3D models and terrain maps for construction, agriculture, and urban planning."
+      title: "Centimeter-Level Mapping",
+      description: "Utilizing the Matrice 4E's mechanical shutter and RTK module to generate high-fidelity 3D models with unmatched spatial accuracy."
     },
     {
-      icon: <Crosshair className="w-8 h-8 text-[#00C1A3]" />,
+      icon: <Target className="w-8 h-8 text-[#00C1A3]" />,
       title: "Precision Surveying",
-      description: "Delivering actionable, centimeter-level spatial data to streamline enterprise workflows."
+      description: "Delivering actionable GIS data through integrated Laser Range Finding and high-resolution aerial photogrammetry."
     },
     {
       icon: <Moon className="w-8 h-8 text-[#00C1A3]" />,
-      title: "Advanced Night Operations",
-      description: "Leveraging ultra-high ISO and Night Scene capabilities for uncompromised security and data collection after dark."
+      title: "24/7 Tactical Operations",
+      description: "Advanced night vision and NIR auxiliary lighting enable safe, high-detail operations in near-total darkness."
     },
     {
-      icon: <Video className="w-8 h-8 text-[#00C1A3]" />,
-      title: "Aerial Cinematography",
-      description: "Capturing cinematic, high-resolution vistas with our 4/3-inch CMOS sensors for media and marketing."
+      icon: <Zap className="w-8 h-8 text-[#00C1A3]" />,
+      title: "Industrial Inspection",
+      description: "56x Hybrid Zoom capabilities allow for safe, detailed analysis of critical infrastructure from extended stand-off distances."
     }
   ];
 
   const specs = [
     {
       title: "Mechanical Shutter & RTK Precision",
-      spec: "20MP Mechanical Shutter + RTK support",
-      benefit: "Centimeter-Level Accuracy for Your Projects. Eliminates rolling shutter distortion, ensuring perfectly accurate mapping data."
+      spec: "4/3 CMOS 20MP Sensor + 0.7s Interval Shots",
+      benefit: "Centimeter-Level Accuracy for Your Projects. Eliminates rolling shutter distortion, ensuring perfectly accurate mapping data even at high speeds."
     },
     {
-      title: "Extreme Low-Light Sensors",
-      spec: "ISO up to 819,200 & Night Scene Mode",
-      benefit: "Uncompromised Operations, Day or Night. Clear subject identification and data capture even in near-total darkness."
+      title: "Omnidirectional Night Vision",
+      spec: "Low-light Fisheye Sensors + NIR Auxiliary Light",
+      benefit: "Uncompromised Operations, Day or Night. 360-degree obstacle sensing and 100m NIR visibility for safe missions in total darkness."
     },
     {
-      title: "High-Resolution Hybrid Zoom",
-      spec: "48MP Tele Camera with 56x Hybrid Zoom",
-      benefit: "Detail-Rich Inspections from a Distance. Inspect critical infrastructure safely without sacrificing image quality."
+      title: "Ultra-Long Range Tele & LRF",
+      spec: "56x Hybrid Zoom + 1800m Laser Range Finder",
+      benefit: "Detail-Rich Inspections from a Distance. Obtain precise coordinates and high-res imagery from safe stand-off distances."
     }
   ];
 
@@ -227,19 +228,11 @@ export default function DronesPage() {
       </section>
 
       {/* CTA Section */}
-      <section className="py-32 px-6 bg-gradient-to-t from-black to-transparent text-center relative z-20">
-        <FadeInSection>
-          <h2 className="text-5xl md:text-6xl font-bold tracking-tight mb-8">
-            Ready to Deploy?
-          </h2>
-          <p className="text-xl text-white/70 max-w-2xl mx-auto mb-10">
-            Contact us today to discuss how our enterprise drone solutions can provide centimeter-level accuracy for your next project.
-          </p>
-          <Link href="/contact" className="inline-flex items-center px-10 py-5 bg-[#00C1A3] hover:bg-[#00C1A3]/80 text-[#0b1120] font-semibold rounded-full text-lg transition-all duration-300 shadow-[0_0_20px_rgba(0,193,163,0.4)] hover:shadow-[0_0_30px_rgba(0,193,163,0.6)] transform hover:-translate-y-1">
-            Contact Our Team <ArrowRight className="ml-2 w-5 h-5" />
-          </Link>
-        </FadeInSection>
-      </section>
+      <CTASection 
+        title="Ready to Deploy?"
+        subtitle="Contact us today to discuss how our enterprise drone solutions, powered by the DJI Matrice 4E, can provide the precision your project demands."
+        pillarColor="#00C1A3"
+      />
 
     </div>
   );

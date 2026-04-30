@@ -1,6 +1,7 @@
 import React from "react";
 import Link from "next/link";
 import { ArrowLeft } from "lucide-react";
+import CTASection from "@/components/CTASection";
 
 export default function MediaPage() {
   return (
@@ -54,6 +55,11 @@ export default function MediaPage() {
           <p className="text-white/40 font-mono text-sm tracking-widest uppercase">Cinematic Reel Placeholder</p>
         </div>
       </section>
+      <CTASection 
+        title="Tell Your Story with Impact."
+        subtitle="Our cinematic production team is ready to bring your brand's narrative to life with world-class filmmaking and post-production."
+        pillarColor="#10B981"
+      />
     </div>
   );
 }
